@@ -1,4 +1,4 @@
-В файле App.config в connectionString ComputerShopContext заменить "DESKTOP-LH07S7A" 
+В файле Construct_Main/App.config в connectionString ComputerShopContext заменить "DESKTOP-LH07S7A" 
 на собственный Server name MS SQL Server.
 
 Запустить проект. БД shop создастся.
