@@ -1,0 +1,8 @@
+В файле App.config в connectionString ComputerShopContext заменить "DESKTOP-LH07S7A" 
+на собственный Server name MS SQL Server.
+
+Запустить проект. БД shop создастся.
+Закрыть программу.
+Открыть и запустить initDb.sql
+
+Программа готова к использованию. 

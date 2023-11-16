@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Construct_Main.Components.ProductBusketControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Construct_Main.Components" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Name="ProductBusketControlModel">
+    
+    <Border CornerRadius="5" Background="{StaticResource YellowColor}" BorderBrush="Gray" BorderThickness="1" Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding Category}" HorizontalAlignment="Center" FontSize="25" VerticalAlignment="Center"/>
+
+            <TextBlock x:Name="Id" Text="{Binding ProductId}" Visibility="Hidden"></TextBlock>
+            
+            <TextBlock Text="{Binding ProductName}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontSize="25"/>
+            <Button Grid.Column="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.SubCountCommand}"
+                        Background="{StaticResource OrangeColor}"
+                        Width="30" Height="30" Cursor="Hand" HorizontalAlignment="Left" Margin="5, 0, 0, 0">
+                <Button.CommandParameter>
+                    <Binding Path="Text" ElementName="Id"></Binding>
+                </Button.CommandParameter>
+                <materialDesign:PackIcon Kind="Minus" Foreground="White"></materialDesign:PackIcon>
+            </Button>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Center"  Text="{Binding CountString}" VerticalAlignment="Center" FontSize="30" Margin="10"/>
+            <Button Grid.Column="2" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        Background="{StaticResource OrangeColor}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.AddCountCommand}"
+                        Width="30" Height="30">
+                <Button.CommandParameter>
+                    <Binding Path="Text" ElementName="Id"></Binding>
+                </Button.CommandParameter>
+                <materialDesign:PackIcon Kind="Plus" Foreground="White"></materialDesign:PackIcon>
+            </Button>
+            <TextBlock Text="{Binding PriceString}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Cursor="Hand"/>
+
+            <Button Grid.Column="4" Cursor="Hand" Width="30" Height="30" BorderBrush="Transparent"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}" 
+                    Background="{StaticResource OrangeColor}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.RemoveProductCommand}">
+                <Button.CommandParameter>
+                    <Binding Path="Text" ElementName="Id"></Binding>
+                </Button.CommandParameter>
+                <materialDesign:PackIcon Kind="Close" Foreground="White"/>
+            </Button>
+        </Grid>
+
+    </Border>
+</UserControl>

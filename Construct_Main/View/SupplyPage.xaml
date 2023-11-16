@@ -1,0 +1,72 @@
+﻿<Page x:Class="Construct_Main.View.SupplyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Construct_Main.View" xmlns:components="clr-namespace:Construct_Main.Components"
+
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SupplyPage">
+
+
+    
+    <Grid Margin="0,30,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource GrayColor}" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" FontSize="50" Text="Заказать для магазина"/>
+
+        <ScrollViewer  Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <ItemsControl ItemsSource="{Binding SupplyLines}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:SupplyProductControl Background="Transparent"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+                <ItemsControl ItemsSource="{Binding AddProductLines}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:AddSupplyProductControl Background="Transparent"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button
+                    Style="{DynamicResource MaterialDesignFloatingActionMiniLightButton}"
+                    HorizontalAlignment="Right"
+                    Margin="10"
+                    Command="{Binding AddSupplyProductCommand}" Cursor="Hand">
+                    <materialDesign:PackIcon Kind="Add"></materialDesign:PackIcon>
+                </Button>
+            </StackPanel>
+            
+        </ScrollViewer>
+
+        <Border Grid.Row="1" Grid.Column="1" CornerRadius="10" Background="{StaticResource YellowColor}" Margin="10" Width="auto" Height="auto" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Width="auto">
+                <TextBlock HorizontalAlignment="Center" FontSize="25" Text="Заказ"/>
+                <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="10"> Итого</TextBlock>
+                <TextBlock HorizontalAlignment="Left" FontSize="20" Margin="10" FontWeight="Bold" Text="{Binding PriceText, StringFormat={}{0} руб.}"/>
+                <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Command="{Binding MakeSupplyCommand}"
+                        CommandParameter="{Binding Path=SelectedValue, ElementName=Supplier}"
+                        Width="auto"
+                        Foreground="Black"
+                        Background="{StaticResource OrangeColor}"
+                        Margin="10" VerticalAlignment="Bottom" materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
+                    Заказать
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

@@ -1,0 +1,85 @@
+﻿<Page x:Class="Construct_Main.View.ReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Construct_Main.View"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReportPage">
+
+    <Page.Resources>
+        <local:BoolToVisibility x:Key="BoolToVisibilityConverter"></local:BoolToVisibility>
+        <local:NegateBoolToVisibility x:Key="NegateBoolToVisibilityConverter"></local:NegateBoolToVisibility>
+        <local:MyConverter x:Key="MyConverter"></local:MyConverter>
+    </Page.Resources>
+
+    <Grid Background="{Binding Path=Background}" Margin="70,30,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="170"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Отчет по продажам" Grid.ColumnSpan="2" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource GrayColor}"/>
+
+        <Border Grid.Row="1" Grid.Column="1" CornerRadius="10" Background="{StaticResource YellowColor}" Margin="10" Height="auto" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <TextBlock Foreground="Black" HorizontalAlignment="Center" FontSize="25" Text="Период"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock FontSize="20" Margin="10, 0" Text="От" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom"/>
+                    <DatePicker x:Name="From" Margin="0, 0, 10, 0" FontSize="20" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock FontSize="20" Margin="10, 0" Text="До" Grid.Row="1" Grid.Column="0"/>
+                    <DatePicker x:Name="To" Margin="0, 0, 10, 0" FontSize="20" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+                <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Command="{Binding CalculateReport}"
+                        Foreground="Black"
+                        Background="{StaticResource OrangeColor}"
+                        Margin="10" VerticalAlignment="Bottom" materialDesign:ButtonAssist.CornerRadius="5" Cursor="Hand">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MyConverter}">
+                            <Binding Path="SelectedDate" ElementName="From"/>
+                            <Binding Path="SelectedDate" ElementName="To"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                    Рассчитать
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="Количество заказов: "/>
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="{Binding CountOrders}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="Количество выполненных: "/>
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="{Binding CountSuccessOrders}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="Количество заказанных товаров: "/>
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="{Binding CountProducts}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="Прибыль: "/>
+                <TextBlock FontSize="20" Margin="10" Foreground="{StaticResource GrayColor}" Text="{Binding Money}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

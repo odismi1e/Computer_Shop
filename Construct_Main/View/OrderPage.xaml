@@ -1,0 +1,53 @@
+﻿<Page x:Class="Construct_Main.View.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Construct_Main.View" xmlns:components="clr-namespace:Construct_Main.Components"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrderPage">
+
+    <Page.Resources>
+        <local:BoolToVisibility x:Key="BoolToVisibilityConverter"/>
+    </Page.Resources>
+    
+    <Grid Background="{Binding Path=Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" Text="Заказы" Foreground="{StaticResource GrayColor}"/>
+
+        <TextBlock Grid.Row="0" Grid.RowSpan="2" Text="Войдите в систему" Foreground="{StaticResource GrayColor}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.IsUnauth, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1" Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.IsCustomer, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <ItemsControl x:Name="items" ItemsSource="{Binding Orders}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:OrderComponent Background="Transparent"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1" Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.IsSeller, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <ItemsControl x:Name="itemsSeller" ItemsSource="{Binding Orders}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:OrderSellerComponent Background="Transparent" Cursor="Hand"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

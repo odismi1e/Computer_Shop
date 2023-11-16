@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c9e068263b141d0a252a63113260920" Name="Diagram1">
+        <EntityTypeShape EntityType="ComputerShopModel.Category" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Customer" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Manufacturer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Order_line" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.OrderC" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.OrderStatus" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Product" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Seller" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Supplier" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.Supply" Width="1.5" PointX="10" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerShopModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="ComputerShopModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_OrderC_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_Product_Manufacturer" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_Order_line_Orderc" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_Order_line_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_OrderC_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_OrderC_Seller" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerShopModel.FK_Supply_Supplier" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ComputerShopModel.SupplyLine" Width="1.5" PointX="7.375" PointY="4" />
+        <AssociationConnector Association="ComputerShopModel.FK_SupplyLine_Product" />
+        <AssociationConnector Association="ComputerShopModel.FK_SupplyLine_Supply" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

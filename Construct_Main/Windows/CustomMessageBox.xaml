@@ -1,0 +1,44 @@
+﻿<Window x:Class="Construct_Main.Windows.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Construct_Main.Windows"
+        mc:Ignorable="d"
+        Title="CustomMessageBox" Height="200" Width="400"
+        WindowStyle="None"
+        Background="{StaticResource BackgroundColor}"
+        AllowsTransparency="True">
+    <Border x:Name="MainBorder" CornerRadius="20" BorderThickness="2" BorderBrush="DarkGray" Background="{StaticResource BackgroundColor}">
+        <Grid>
+            <Border CornerRadius="20,20,0,0" Background="{StaticResource DarkerBackgroundColor}" Height="30" VerticalAlignment="Top">
+                <Rectangle Panel.ZIndex="1" x:Name="DragRectangle" MouseDown="DragRectangle_MouseDown" Fill="Transparent" VerticalAlignment="Top" Height="30"/>
+            </Border>
+            <TextBlock Foreground="{StaticResource GrayColor}" HorizontalAlignment="Center" IsHitTestVisible="False"  FontSize="20" x:Name="HeadText">Ошибка авторизации</TextBlock>
+            <StackPanel Panel.ZIndex="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="auto" Grid.ColumnSpan="2">
+
+                <Button x:Name="CloseButton" Style="{DynamicResource MaterialDesignFlatDarkBgButton}"
+                        Background="Red" 
+                        Grid.Column="2" Grid.Row="0"
+                        Height="30" Width="auto"
+                        materialDesign:ButtonAssist.CornerRadius="0,20,0,0" 
+                        BorderThickness="0"  
+                        Click="CloseButton_Click">
+                    <materialDesign:PackIcon Kind="Close" Foreground="White"/>
+                </Button>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Foreground="{StaticResource GrayColor}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" x:Name="MainText">Неверный логин или пароль</TextBlock>
+                <Button
+                    Margin="20"
+                    Background="{StaticResource OrangeColor}"
+                    Style="{DynamicResource MaterialDesignFlatAccentBgButton}"
+                    Width="150" Cursor="Hand"
+                    Click="CloseButton_Click">
+                    ОК
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

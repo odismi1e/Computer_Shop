@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Construct_Main.Components.SideMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Construct_Main.Components"
+             mc:Ignorable="d" >
+    <Border CornerRadius="0,30,30,0" Background="{StaticResource BackgroundColor}" Height="auto" BorderBrush="DarkGray" BorderThickness="1">
+        <Grid >
+
+            <StackPanel Orientation="Vertical" Width="250" Height="auto" Margin="5, 15" HorizontalAlignment="Center">
+                <Button Visibility="{Binding NotSel}" x:Name="CatalogButton"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NavigateCommand}"
+                        CommandParameter="Catalog"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="200" Margin="0,0,0,10" Height="40" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="20" >
+                    Лента товаров
+                </Button>
+                <Button 
+                        Visibility="{Binding SellerVis}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NavigateCommand}"
+                        CommandParameter="Supply"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="200" Margin="0,0,0,10" Height="40" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="20" >
+                    Поставка
+                </Button>
+                <Button Visibility="{Binding NotSel}" x:Name="BusketButton"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NavigateCommand}"
+                        CommandParameter="Busket"                        
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="200" Margin="0,0,0,10" Height="40" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="20" >
+                    Корзина
+                </Button>
+                <Button x:Name="OrdersButton" 
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NavigateCommand}"
+                        CommandParameter="Order"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="200" Margin="0,0,0,10" Height="40" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="20" >
+                    Заказы
+                </Button>
+                <Button Visibility="{Binding SellerVis}" x:Name="ReportButton" 
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NavigateCommand}"
+                        CommandParameter="Report"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="200" Margin="0,0,0,10" Height="40" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="20" >
+                    Отчеты
+                </Button>
+                <Button x:Name="AuthButton" 
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.NavigateCommand}"
+                        CommandParameter="Auth"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="200" Margin="0,0,0,10" Height="40" Cursor="Hand" materialDesign:ButtonAssist.CornerRadius="20" >
+                    Авторизация
+                </Button>
+            </StackPanel>
+            <Button 
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.SideMenuCloseCommand}"
+                    VerticalAlignment="Top" HorizontalAlignment="Right" Cursor="Hand" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="20" Height="20"
+                    Margin="0,10,10,0" Background="Red" BorderBrush="Transparent">
+                <materialDesign:PackIcon Kind="Close" Foreground="White"></materialDesign:PackIcon>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

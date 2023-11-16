@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Construct_Main.Components.ProductControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Construct_Main.Components" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:views="clr-namespace:Construct_Main.View"
+             xmlns:vm="clr-namespace:Construct_Main.ViewModel"
+             mc:Ignorable="d" Name="ProductControlModel">
+    
+    <UserControl.Resources>
+        <views:BoolToVisibility x:Key="BoolToVisibility"></views:BoolToVisibility>
+        <views:NegateBoolToVisibility x:Key="NegateBoolToVisibility"></views:NegateBoolToVisibility>
+        <views:IntToBool x:Key="IntToBool"></views:IntToBool>
+    </UserControl.Resources>
+
+    <Border CornerRadius="5" Background="{StaticResource YellowColor}" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="6">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition> 
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding Category}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+
+            <TextBlock x:Name="Id" Text="{Binding Id}" Visibility="Hidden"/>
+            <TextBlock x:Name="Name" Text="{Binding Name}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+
+            <TextBlock x:Name="Price" Text ="{Binding PriceString}" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Cursor="Hand"/>
+
+            <Button Name="toProductButton" Grid.Column="3" Cursor="Hand" Width="40" Height="40"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.ToProductPageCommand}"
+                    Background="{StaticResource OrangeColor}">
+
+                <materialDesign:PackIcon Kind="CardBulleted" Width="20" Height="20" Foreground="White"></materialDesign:PackIcon>
+                <Button.CommandParameter>
+                    <Binding Path="Text" ElementName="Id"></Binding>
+                </Button.CommandParameter>
+            </Button>
+            
+            <Button Name="addButton" Grid.Column="4" Cursor="Hand"
+                    IsEnabled="{Binding Count, Converter={StaticResource IntToBool}}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Background="{StaticResource OrangeColor}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.AddToBusketCommand}"
+                    Visibility="{Binding IsInBusket, Converter={StaticResource NegateBoolToVisibility}}">
+
+                <materialDesign:PackIcon Kind="BasketFill" Width="20" Height="20" Foreground="White"></materialDesign:PackIcon>
+                <Button.CommandParameter>
+                    <Binding Path="Text" ElementName="Id"></Binding>
+                </Button.CommandParameter>
+            </Button>
+
+            <Button Name="removeButton" Grid.Column="4" Cursor="Hand"
+                    IsEnabled="{Binding Count, Converter={StaticResource IntToBool}}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    Background="Red"
+                    Visibility="{Binding IsInBusket, Converter={StaticResource BoolToVisibility}}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.RemoveProductCommand}">
+                <materialDesign:PackIcon Kind="BasketUnfill" Width="20" Height="20" Foreground="White"></materialDesign:PackIcon>
+                <Button.CommandParameter>
+                    <Binding Path="Text" ElementName="Id"></Binding>
+                </Button.CommandParameter>
+            </Button>
+            
+        </Grid>
+
+    </Border>
+</UserControl>
